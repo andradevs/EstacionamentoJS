@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
 </head>
-<body>
+<body onload="mostraCarro()">
     <div class="contaner">
         <div class="header clearfix"> 
             <h2>Estacionamento Js <small>:Criado por Guilherme ANDRADE</small></h2>
@@ -26,6 +26,22 @@
                     <button type="submit" class="btn btn-primary">adicionar</button>
                 </div>
             </form>
+        </div>
+        <div class="row-marketing">
+            <div class="col-lg-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Modelo</th>
+                            <th>Placa</th>
+                            <th>Entrada</th>
+                            <th>Finalizar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="resultado"></tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script src="js/jquery.js"></script>

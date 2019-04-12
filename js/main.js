@@ -1,6 +1,7 @@
 document.getElementById('formulario').addEventListener('submit',cadastraVeiculo);
 
 function cadastraVeiculo(e){
+    e.preventDefault();
     var modeloCarro = document.getElementById('modeloCarro').value;
     var placaCarro = document.getElementById('placaCarro').value;
     var time = new Date();
@@ -24,8 +25,30 @@ function cadastraVeiculo(e){
         localStorage.setItem('patio',JSON.stringify(carros));
     }
     
+}
 
-    
+function mostraCarro(){
+    var tabelaCarro = document.getElementById('resultado');
+    var carros = JSON.parse(localStorage.getItem('patio'));
+   
+    for (var i = 0; i < carros.lenght; i++) {
+        console.log('piru');
 
-    e.preventDefault();
+    }
+
+    for(var i=0; i<carros.length;i++){
+        
+        var modelo = carros[i].modelo;
+        var placa = carros[i].placa;
+        var hora = carros[i].hora;
+        var minutos = carros[i].minutos;
+        
+
+        tabelaCarro.innerHTML += "<tr><td>" + modelo + 
+                                "</td><td>" + placa + 
+                                "</td><td>"+hora+ ":" +minutos+'</td><td><button type="" class="btn btn-primary">remover</button>'+
+                                '</td></tr>';
+        
+    }
+    console.log(carros.length);
 }
