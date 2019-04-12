@@ -6,6 +6,11 @@ function cadastraVeiculo(e){
     var placaCarro = document.getElementById('placaCarro').value;
     var time = new Date();
 
+    if(!modeloCarro || !placaCarro){
+        alert('Prencha os campos em branco!')
+        return false;
+    }
+
     carro ={
         modelo: modeloCarro,
         placa: placaCarro,
@@ -24,17 +29,29 @@ function cadastraVeiculo(e){
         carros.push(carro);
         localStorage.setItem('patio',JSON.stringify(carros));
     }
+
+    document.getElementById('formulario').reset();
+    mostraCarro();
+}
+
+function apagarCarro(placa){
+    var carros =  JSON.parse(localStorage.getItem('patio'));
     
+    for (var i = 0; i < carros.length ; i ++){
+
+        if(carros[i].placa == placa){
+            carros.splice(i,1);
+            localStorage.setItem('patio',JSON.stringify(carros));
+        }
+    }
+
+    mostraCarro();
 }
 
 function mostraCarro(){
     var tabelaCarro = document.getElementById('resultado');
     var carros = JSON.parse(localStorage.getItem('patio'));
-   
-    for (var i = 0; i < carros.lenght; i++) {
-        console.log('piru');
-
-    }
+        tabelaCarro.innerHTML ="";
 
     for(var i=0; i<carros.length;i++){
         
@@ -46,9 +63,9 @@ function mostraCarro(){
 
         tabelaCarro.innerHTML += "<tr><td>" + modelo + 
                                 "</td><td>" + placa + 
-                                "</td><td>"+hora+ ":" +minutos+'</td><td><button type="" class="btn btn-primary">remover</button>'+
+                                "</td><td>"+hora+ ":" +minutos+'</td><td><button class="btn btn-danger" onclick="apagarCarro(\''+placa+'\')">Excluir</button>'+
                                 '</td></tr>';
         
     }
-    console.log(carros.length);
+    
 }
