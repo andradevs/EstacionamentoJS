@@ -15,11 +15,14 @@ function cadastraVeiculo(e){
         modelo: modeloCarro,
         placa: placaCarro,
         hora: time.getHours(),
-        minutos: time.getMinutes()
+        minutos: time.getMinutes(),
+        dia: time.getDate() ,
+        mes: time.getMonth(),
+        ano: time.getFullYear()
     }
 
     console.log(carro);
-
+    //Adciona o carro no patio 
     if(localStorage.getItem('patio') === null){
         var carros = [];
         carros.push(carro);
@@ -28,6 +31,16 @@ function cadastraVeiculo(e){
         var carros = JSON.parse(localStorage.getItem('patio'));
         carros.push(carro);
         localStorage.setItem('patio',JSON.stringify(carros));
+    }
+    //Adiciona o carro no Historico
+    if(localStorage.getItem('historico') === null){
+        var carros = [];
+        carros.push(carro);
+        localStorage.setItem('historico',JSON.stringify(carros));
+    }else{
+        var carros = JSON.parse(localStorage.getItem('historico'));
+        carros.push(carro);
+        localStorage.setItem('historico',JSON.stringify(carros));
     }
 
     document.getElementById('formulario').reset();
@@ -68,4 +81,39 @@ function mostraCarro(){
         
     }
     
+}
+
+function historico(){
+    var tabelaCarro = document.getElementById('historico');
+    var carros = JSON.parse(localStorage.getItem('historico'));
+    
+    tabelaCarro.innerHTML = '';
+    /*carros.sort(function(a,b){
+        var 
+        
+        return a.dia - b.dia;
+
+
+    })*/
+
+        for(var i=0; i<carros.length;i++){
+        
+            var modelo = carros[i].modelo;
+            var placa = carros[i].placa;
+            var hora = carros[i].hora;
+            var minutos = carros[i].minutos;
+            var dia = carros[i].dia;
+            var mes = carros[i].mes;
+            var ano = carros[i].ano;
+            
+    
+            tabelaCarro.innerHTML += "<tr><td>" + modelo + 
+                                    "</td><td>" + placa + 
+                                    "</td><td>"+hora+ ":" +minutos+
+                                    '</td><td>' + dia + '/' +mes +"/"+ano+
+                                    '</td></tr>';
+            
+        }
+
+
 }
