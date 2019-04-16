@@ -88,13 +88,14 @@ function historico(){
     var carros = JSON.parse(localStorage.getItem('historico'));
     
     tabelaCarro.innerHTML = '';
-    /*carros.sort(function(a,b){
-        var 
+    carros.sort(function(a,b){
+        var comp1 = new Date(a.ano,a.mes,a.dia,a.hora,a.minutos);
+        var comp2 = new Date(b.ano,b.mes,b.dia,b.hora,b.minutos);
         
-        return a.dia - b.dia;
+        return comp2 - comp1;
 
 
-    })*/
+    })
 
         for(var i=0; i<carros.length;i++){
         
