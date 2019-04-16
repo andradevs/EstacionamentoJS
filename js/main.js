@@ -1,5 +1,11 @@
-document.getElementById('formulario').addEventListener('submit',cadastraVeiculo);
 
+// Verifica se na pagina existe o formulario.
+var form = document.getElementById('formulario')
+if(form){
+    form.addEventListener('submit',cadastraVeiculo);
+}
+
+//Insere o Veiculo no arquivo Local
 function cadastraVeiculo(e){
     e.preventDefault();
     var modeloCarro = document.getElementById('modeloCarro').value;
@@ -10,7 +16,7 @@ function cadastraVeiculo(e){
         alert('Prencha os campos em branco!')
         return false;
     }
-
+    // Obejeto Carro
     carro ={
         modelo: modeloCarro,
         placa: placaCarro,
@@ -47,6 +53,7 @@ function cadastraVeiculo(e){
     mostraCarro();
 }
 
+// Remove o veiculo do Patio
 function apagarCarro(placa){
     var carros =  JSON.parse(localStorage.getItem('patio'));
     
@@ -76,7 +83,8 @@ function mostraCarro(){
 
         tabelaCarro.innerHTML += "<tr><td>" + modelo + 
                                 "</td><td>" + placa + 
-                                "</td><td>"+hora+ ":" +minutos+'</td><td><button class="btn btn-danger" onclick="apagarCarro(\''+placa+'\')">Excluir</button>'+
+                                "</td><td>"+hora+ ":" 
+                                +minutos+'</td><td><button class="btn btn-danger" onclick="apagarCarro(\''+placa+'\')">Excluir</button>'+
                                 '</td></tr>';
         
     }
