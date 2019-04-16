@@ -14,8 +14,8 @@ function cadastraVeiculo(e){
     carro ={
         modelo: modeloCarro,
         placa: placaCarro,
-        hora: time.getHours(),
-        minutos: time.getMinutes(),
+        hora: ( "0" + time.getHours()).slice(-2),
+        minutos: ( "0" + time.getMinutes()).slice(-2),
         dia: time.getDate() ,
         mes: time.getMonth(),
         ano: time.getFullYear()
