@@ -89,32 +89,28 @@ function historico(){
     
     tabelaCarro.innerHTML = '';
     carros.sort(function(a,b){
-        var comp1 = new Date(a.ano,a.mes,a.dia,a.hora,a.minutos);
-        var comp2 = new Date(b.ano,b.mes,b.dia,b.hora,b.minutos);
         
-        return comp2 - comp1;
+        return new Date(b.ano,b.mes,b.dia,b.hora,b.minutos) - new Date(a.ano,a.mes,a.dia,a.hora,a.minutos);
+        })
 
-
-    })
-
-        for(var i=0; i<carros.length;i++){
+    for(var i=0; i<carros.length;i++){
         
-            var modelo = carros[i].modelo;
-            var placa = carros[i].placa;
-            var hora = carros[i].hora;
-            var minutos = carros[i].minutos;
-            var dia = carros[i].dia;
-            var mes = carros[i].mes;
-            var ano = carros[i].ano;
+        var modelo = carros[i].modelo;
+        var placa = carros[i].placa;
+        var hora = carros[i].hora;
+        var minutos = carros[i].minutos;
+        var dia = carros[i].dia;
+        var mes = carros[i].mes;
+        var ano = carros[i].ano;
             
     
-            tabelaCarro.innerHTML += "<tr><td>" + modelo + 
-                                    "</td><td>" + placa + 
-                                    "</td><td>"+hora+ ":" +minutos+
-                                    '</td><td>' + dia + '/' +mes +"/"+ano+
-                                    '</td></tr>';
+        tabelaCarro.innerHTML += "<tr><td>" + modelo + 
+                                "</td><td>" + placa + 
+                                "</td><td>"+hora+ ":" +minutos+
+                                '</td><td>' + dia + '/' +mes +"/"+ano+
+                                '</td></tr>';
             
-        }
+    }
 
 
 }
