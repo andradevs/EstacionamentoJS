@@ -59,7 +59,7 @@ function apagarCarro(placa){
     var carrosh = JSON.parse(localStorage.getItem('historico'));
     var time = new Date();
     var hora =  ( "0" + time.getHours()).slice(-2) + ":" + ( "0" + time.getMinutes()).slice(-2);
-    var dia = time.getDate() + '/' + time.getMinutes() + '/' + time.getFullYear();
+    var dia = time.getDate() + '/' + time.getMonth() + '/' + time.getFullYear();
 
     for (var i = 0; i < carros.length ; i ++){
 
@@ -73,16 +73,21 @@ function apagarCarro(placa){
     for(var i = 0; i<carrosh.length; i++){
 
         if(carrosh[i].placa == placa){
-            Object.defineProperties(carrosh[i],{
-                'saidah': {value : hora,
-                            enumerable:true,
-                            configurable:true },
-                'saidad': {value : dia,
-                            enumerable:true,
-                            configurable:true}});
-            console.log(carrosh[i]);
-            console.log(carrosh);
-            localStorage.setItem('historico',JSON.stringify(carrosh));
+            if(typeof carrosh[i].saidah === "undefined"){
+            
+                Object.defineProperties(carrosh[i],{
+                    'saidah': {value : hora,
+                                enumerable:true,
+                                configurable:true },
+                    'saidad': {value : dia,
+                                enumerable:true,
+                                configurable:true}});
+                console.log(carrosh[i]);
+                console.log(carrosh);
+                localStorage.setItem('historico',JSON.stringify(carrosh));
+
+            }
+            
         }
     
     }
