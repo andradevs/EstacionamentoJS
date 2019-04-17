@@ -56,13 +56,35 @@ function cadastraVeiculo(e){
 // Remove o veiculo do Patio
 function apagarCarro(placa){
     var carros =  JSON.parse(localStorage.getItem('patio'));
-    
+    var carrosh = JSON.parse(localStorage.getItem('historico'));
+    var time = new Date();
+    var hora =  ( "0" + time.getHours()).slice(-2) + ":" + ( "0" + time.getMinutes()).slice(-2);
+    var dia = time.getDate() + '/' + time.getMinutes() + '/' + time.getFullYear();
+
     for (var i = 0; i < carros.length ; i ++){
 
         if(carros[i].placa == placa){
             carros.splice(i,1);
             localStorage.setItem('patio',JSON.stringify(carros));
         }
+
+    }
+
+    for(var i = 0; i<carrosh.length; i++){
+
+        if(carrosh[i].placa == placa){
+            Object.defineProperties(carrosh[i],{
+                'saidah': {value : hora,
+                            enumerable:true,
+                            configurable:true },
+                'saidad': {value : dia,
+                            enumerable:true,
+                            configurable:true}});
+            console.log(carrosh[i]);
+            console.log(carrosh);
+            localStorage.setItem('historico',JSON.stringify(carrosh));
+        }
+    
     }
 
     mostraCarro();
@@ -110,15 +132,20 @@ function historico(){
         var dia = carros[i].dia;
         var mes = carros[i].mes;
         var ano = carros[i].ano;
-            
-    
+        var horaS = carros[i].saidah;
+        var diaS = carros[i].saidad;
+
         tabelaCarro.innerHTML += "<tr><td>" + modelo + 
                                 "</td><td>" + placa + 
                                 "</td><td>"+hora+ ":" +minutos+
                                 '</td><td>' + dia + '/' +mes +"/"+ano+
+                                '</td><td>' + horaS +
+                                '</td><td>' + diaS +
                                 '</td></tr>';
             
     }
+
+    console.log(carros);
 
 
 }
